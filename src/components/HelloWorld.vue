@@ -1,205 +1,151 @@
-<script >
+<script>
+  
 </script>
-
 <template>
-  <div class="menu flex flex-col fixed">
-    <button class="menuOpen mt-8 mr-36">=</button>
-
-    <div class="flex flex-col m-8">
-      <button class="menuElements"><img src="">Главная</button>
-
-      <button class="menuElements"><img src="">Билеты</button>
-
-      <button class="menuElements"><img src="">Прокат</button>
-
-      <button class="menuElements"><img src="">Школа</button>
-
-      <button class="menuElements"><img src="">Развлечение</button>
-
-      <button class="menuElements"><img src="">Отель</button>
-
-      <button class="menuElements"><img src="">Ресторан</button>
-
-      <button class="menuElements"><img src="">Магазин</button>
-
-      <button class="menuElements"><img src="">Детям</button>
+  <header class="header w-full h-16 flex p-4">
+    <div>
+      <button class="w-10 h-10 headerBtn"><img class="menuImg" src="./img/menu.png"></button>
+      <button class="w-10 h-10 headerBtn"><img class="menuImg" src="./img/find.png"></button>
     </div>
-
-    <button class="menuInfo">Инфо</button>
+    <img class="h-10" src="./img/logo.jpg">
+    <div>
+      <button class="w-10 h-10 headerBtn"><img class="menuImg" src="./img/user.png"></button>
+      <button class="w-10 h-10 headerBtn"><img class="menuImg2" src="./img/vec.png"></button>
+    </div>
+  </header>
+  <div class="nav w-72 absolute bg-blue-300 min-h-100% right-full">
+    hadsbkcjslkdnv
+    <br>dvadvadv
+    <br>advdavadv
+    <br>advadv
   </div>
-
-  <div class="mainWindow">
-    <div class="header flex">
-      <img src="./logo.jpg" class="logo">
+  <div class="mainContent">
+    <b>Weather</b>
+    <div class="cards">
+      <div class="card today bg-sky-300 min-h-100"></div>
+      <div class="card hourly bg-sky-300 min-h-100"></div>
     </div>
-    <div class="Window">
-      <b class="text-4xl">Погода</b>
-      <div class="cards">
-        <div class="card"></div>
-        <div class="card2"></div>
-      </div>
-      <div class="card3"></div>
-    </div>
+    <div class="soon bg-sky-300 w-full min-h-100"></div>
   </div>
-
-  <footer class="text-white flex flex-col">
-    <div class="up flex">
-      <div class="footerIn0">
-        <img class="shymFooterImg" src="./shym.png">
-        <img class="google" src="./google.png">
-        <img class="appStore" src="./appStore.png">
+  <footer class="w-full min-h-100">
+    <img class="shymImg" src="./img/shym.png">
+    <p class="text-white mt-8 title">Курорт</p>
+    <div class="flex">
+      <div class="w-1/2 ul flex flex-col">
+        <p>Отели</p>
+        <p>Рестораны</p>
+        <p>Магазины</p>
       </div>
-      <div class="footerIn flex flex-col ml-96">
-        <b class="between">Курорт</b>
-        <p class="between2 betweenColor">Отели</p>
-        <p class="between betweenColor">Рестораны</p>
-        <p class="between betweenColor">Развлечения</p>
-        <p class="between betweenColor">Магазин</p>
-        <p class="between betweenColor">Детям</p>
-      </div>
-      <div class="footerIn flex flex-col ml-16">
-        <b class="between">Катания</b>
-        <p class="between2 betweenColor">Билеты</p>
-        <p class="between betweenColor">Прокат</p>
-        <p class="between betweenColor">Школа</p>
-        <p class="between betweenColor">Паркинг</p>
-      </div>
-      <div class="footerIn flex flex-col ml-16">
-        <b class="between">Инфо</b>
-        <p class="between2 betweenColor">Погода</p>
-        <p class="between betweenColor">Правила</p>
-        <p class="between betweenColor">Новости</p>
-        <p class="between betweenColor">Как добраться</p>
-        <p class="between betweenColor">Тех. поддержка</p>
-      </div>
-      <div class="footerIn3 flex flex-col ml-16">
-        <b class="between">Контакты</b>
-        <p class="between2 betweenColor">ссылки на соцсети</p>
-        <p class="between betweenColor">info@shymbulak.com</p>
-        <p class="between betweenColor">+7 727 331 77 77</p>
+      <div class="ul flex flex-col">
+        <p>Развлечения</p>
+        <p>Детям</p>
       </div>
     </div>
-    
-    <div class="under">
-      <p>© 2022 ТОО «Chimbulak Development»</p>
+
+    <p class="text-white mt-8 title">Катания</p>
+    <div class="flex">
+      <div class="w-1/2 ul flex flex-col">
+        <p>Билеты</p>
+        <p>Прокат</p>
+      </div>
+      <div class="ul flex flex-col">
+        <p>Школа</p>
+        <p>Паркинг</p>
+      </div>
     </div>
 
+    <p class="text-white mt-8 title">Инфо</p>
+    <div class="flex">
+      <div class="w-1/2 ul flex flex-col">
+        <p>Правила курорта</p>
+        <p>Новости</p>
+      </div>
+      <div class="ul flex flex-col">
+        <p>Как добраться</p>
+        <p>Техническая поддержка</p>
+      </div>
+    </div>
+
+
+
+    <img class="google" src="./img/google.png">
   </footer>
 </template>
-
 <style>
-.under {
-  width: 1296px;
-  margin-top: 70px;
-  padding-top: 20px;
-  border-top: 1px solid #4F5864;
-  color: #4F5864;
-}
-.betweenColor{
-  color: #A0A7AF;
-}
-.menu {
-  width: 300px;
-  height: 1080px;
-  border-right: 2px solid #DAE9F4;
-}
-.mainWindow {
-  width: 1620px;
-  position: absolute;
-  width: 1620px;
-  height: 944px;
-  left: 300px;
-  top: 0px;
-}
 .header {
-  flex-wrap: ;
-  position: absolute;
-  width: 1620px;
-  right: 0%;
-  top: 0%;
-  bottom: 93.17%;
+  justify-content: space-between;
 }
-.menuElements {
-  font-family: Inter;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 22px;
-  letter-spacing: 0em;
-  text-align: left;
-
-  margin: 20px;
+.menuImg {
+  width: 24px;
+  margin: 0 auto;
 }
-.Window {
-  position: absolute;
-  top: 6.83%;
-  width: 1620px;
-  height: 900px;
-  padding: 50px;
-  padding-left: 162px;
-  padding-right: 162px;
+.menuImg2 {
+  width: 20px;
+  margin: 0 auto;
+}
+.headerBtn {
+  margin: 0 6px;
+  border: 1px solid #DAE9F4;
+  border-radius: 6px;
+}
+.mainContent {
+  padding: 16px;
 }
 .cards {
-  margin-top: 30px;
+  margin-top: 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(636px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(208px, 2fr));
   gap: 20px;
 }
 .card {
-  height: 256px;
-  background-color: #75B6F2;
-  border-radius: 20px;
+  height: 168px;
+  background-color: #4f82f9;
+  border-radius: 16px;
 }
-.card2 {
-  height: 256px;
-  box-sizing: border-box;
-  border: 1px solid #F3F5F7;
-  border-radius: 20px;
+.today {
+  background: #75B6F2;
+  box-shadow: 0px 8.88889px 10.6667px rgba(117, 182, 242, 0.15);
 }
-.card3 {
-  margin-top: 30px;
-  width: 1296px;
-  height: 328px;
+.hourly {
+  background: #FFFFFF;
+  box-shadow: 5px 5px 30px rgba(116, 142, 170, 0.12);
+}
+.soon {
+  margin-top: 16px;
+  border-radius: 16px;
+  height: 501px;
   background: #F4F8FD;
-  border-radius: 20px;
 }
 footer {
-  position: absolute;
-  width: 1620px;
-  height: 438px;
-  left: 300px;
-  top: 944px;
   background: #212225;
-  padding-left: 162px;
-  padding-top: 50px;
+  padding: 16px;
 }
-.shymFooterImg {
-  width: 158px;
+.shymImg {
+  width: 117px;
+}
+.title {
+  font-size: 18px;
+}
+.ul {
+  margin-top: 16px;
+}
+p {
+  font-size: 16px;
+  color: #A0A7AF;
+  padding-top: 16px;
 }
 .google {
-  width: 158px;
-  margin-top: 120px;
-}
-.appStore {
-  width: 138px;
-  margin-top: 17px;
-}
-.logo {
-  width: 50px;
-  margin-left: 46px;
-}
-.footerIn0 {
   width: 180px;
 }
-.footerIn {
-  width: 120px;
+
+
+
+@media screen and (min-width: 468px) {
+  .soon {
+    height: 225px;
+  }
 }
-.footerIn3 {
-  width: 200px;
-}
-.between {
-  padding-top: 15px;
-}
-.between2 {
-  padding-top: 30px;
-}
+
+
+
 </style>
