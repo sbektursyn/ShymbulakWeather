@@ -109,6 +109,9 @@ export default {
   </footer>
 </template>
 <style>
+.nav {
+  
+}
 .header {
   justify-content: space-between;
 }
