@@ -1,13 +1,47 @@
 <script>
+import axios from 'axios';
 export default {
   data(){
     return {
-      isRight: true
+      isRight: true,
+      today: '',
+      humidity: '',
+      now: '',
+      hourly: '',
+      hourlyValue: ''
     };
+  },
+  mounted() {
+    this.getWeather();
   },
   methods: {
     menuOpen(){
       this.isRight = !this.isRight
+    },
+    getWeather() {
+      // https://api.openweathermap.org/data/2.5/weather?q=Shymbulak,kz&appid=::MYID::&units=metric 
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Almaty&lang=ru&appid=33ea4cfd68c6b4051c16393b1be274f6&units=metric`)
+        .then(response => {
+          this.today = response.data.main.temp;
+          this.humidity = response.data.main.humidity;
+          this.now = response.data.weather[0].description;
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=Almaty&appid=33ea4cfd68c6b4051c16393b1be274f6&units=metric`)
+        .then(response => {
+          this.hourly = response.data.list[0].main.temp;
+          this.hourlyValue = response.data.list[0].dt_txt;
+
+
+
+          console.log(response.data.list[24])
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 }
@@ -39,10 +73,26 @@ export default {
     <button>info</button>
   </div>
   <div class="mainContent">
-    <b>Weather</b>
+    <b>Погода</b>
     <div class="cards">
-      <div class="card today bg-sky-300 min-h-100"></div>
-      <div class="card hourly bg-sky-300 min-h-100"></div>
+      <div class="card today bg-sky-300 min-h-100 flex">
+        <div class="todayWeather">
+          
+        </div>
+        <div class="todayWeatherNum flex flex-col">
+          <div class="h-1/2 flex p-4">
+            {{today}}°C
+          </div>
+          <div class="todayDescription">
+            {{now}}
+            <p class="todayDescriptionText">Сейчас</p>
+          </div>
+        </div>
+      </div>
+      <div class="card hourly bg-sky-300 min-h-100">
+        {{hourlyValue}}
+        <br>{{hourly}}
+      </div>
     </div>
     <div class="soon bg-sky-300 w-full min-h-100"></div>
   </div>
@@ -109,8 +159,33 @@ export default {
   </footer>
 </template>
 <style>
-.nav {
-  
+.todayDescriptionText {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  padding-top: 8px;
+}
+.todayDescription {
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 25px;
+  color: #FFFFFF;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);;
+  padding: 4px 20px;
+
+}
+.todayWeatherNum {
+  font-size: 48px;
+  color: white;
+  font-weight: 700;
+  line-height: 58px;
+
+  padding-right: 10px;
+  width: 210px;
+}
+.todayWeather {
+  width: 150px;
 }
 .header {
   justify-content: space-between;
