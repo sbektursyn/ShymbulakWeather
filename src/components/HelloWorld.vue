@@ -8,11 +8,17 @@ export default {
       humidity: '',
       now: '',
       hourly: '',
-      hourlyValue: ''
+      hourlyValue: '',
+      weatherData: null,
+      currentTime: null,
+      countHour: null,
+      countSth: ''
     };
   },
   mounted() {
     this.getWeather();
+    this.fetchWeatherData();
+    this.updateTime();
   },
   methods: {
     menuOpen(){
@@ -25,23 +31,79 @@ export default {
           this.today = response.data.main.temp;
           this.humidity = response.data.main.humidity;
           this.now = response.data.weather[0].description;
-          console.log(response.data)
         })
         .catch(error => {
           console.log(error);
         });
       axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=Almaty&appid=33ea4cfd68c6b4051c16393b1be274f6&units=metric`)
         .then(response => {
-          this.hourly = response.data.list[0].main.temp;
+          this.hourly = response.data;
           this.hourlyValue = response.data.list[0].dt_txt;
+          console.log(this.hourly)
+
+          this.countHourly();
+
+
+          this.countSth = '2023-05-16 ' + this.countHour + ':00:00';
+
+          console.log(this.countSth)
+          console.log(this.hourly.list[0].dt_txt)
+          var countSth = this.countSth;
+          var hourlyList = this.hourly.list;
+
+          for (var i = 0; i < 30; i++) {
+            if (countSth == hourlyList[i].dt_txt) {
+              console.log(i);
+            }
+          }
 
 
 
-          console.log(response.data.list[24])
+
         })
         .catch(error => {
           console.log(error);
         });
+    },
+    fetchWeatherData() {
+      const apiKey = '967bce65ce664cc592ae4619c72d28e5';
+      const apiUrl = 'https://api.weatherbit.io/v2.0/forecast/hourly?city=Chimbulak&key=967bce65ce664cc592ae4619c72d28e5';
+
+      axios.get(apiUrl, {
+        params: {
+          key: apiKey,
+          city: 'Chimbulak'
+        }
+      })
+      .then(response => {
+        this.weatherData = response.data;
+
+
+
+
+
+
+
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    },
+    updateTime() {
+      const date = new Date();
+      const hours = String(date.getHours()).padStart(2, '0');
+      this.currentTime = `${hours}`;
+
+      setTimeout(this.updateTime, 1000);
+    },
+    countHourly() {
+      this.countHour = Number(this.currentTime) + 3
+      if (this.countHour == 24){
+        this.countHour = 0
+      } else if (this.countHour > 24) {
+        this.countHour = this.countHour - 24
+      }
+      console.log(this.countHour)
     }
   }
 }
@@ -59,18 +121,18 @@ export default {
       <button class="w-10 h-10 headerBtn"><img class="menuImg2" src="./img/vec.png"></button>
     </div>
   </header>
-  <div :class="{ active: isRight }" class="nav w-72 absolute bg-blue-300 min-h-100%">
-    <p>qwe</p>
-    <p>qwe</p>
-    <p>qwe</p>
-    <p>qwe</p>
-    <p>qwe</p>
-    <p>qwe</p>
-    <p>qwe</p>
-    <p>qwe</p>
-    <p>qwe</p>
-    <p>qwe</p>
-    <button>info</button>
+  <div :class="{ active: isRight }" class="nav w-72 absolute bg-white min-h-100%">
+    <button class="navBtn"><img class="navInfoImg" src="./img/home.png">Главная</button>
+    <button class="navBtn"><img class="navInfoImg" src="./img/funic.png">Билеты</button>
+    <button class="navBtn"><img class="navInfoImg" src="./img/glasses.png">Прокат</button>
+    <button class="navBtn"><img class="navInfoImg" src="./img/">Школа</button>
+    <button class="navBtn"><img class="navInfoImg" src="./img/">Развлечения</button>
+    <button class="navBtn"><img class="navInfoImg" src="./img/">Отель</button>
+    <button class="navBtn"><img class="navInfoImg" src="./img/">Рестораны</button>
+    <button class="navBtn"><img class="navInfoImg" src="./img/">Магазины</button>
+    <button class="navBtn"><img class="navInfoImg" src="./img/">Детям</button>
+    <button class="navBtn"><img class="navInfoImg" src="./img/">Паркинг</button>
+    <button class="navBtn2"><img class="navInfoImg" src="./img/info.png">info</button>
   </div>
   <div class="mainContent">
     <b>Погода</b>
@@ -89,12 +151,32 @@ export default {
           </div>
         </div>
       </div>
-      <div class="card hourly bg-sky-300 min-h-100">
-        {{hourlyValue}}
-        <br>{{hourly}}
+      <div class="card hourly bg-sky-300 min-h-100 flex flex-col">
+        <div class="flex nameHourly">
+          <img class="clockImg" src="./img/clock.png">Погода в течение дня
+        </div>
+        <div class="flex hourlyContent min-w-100">
+
+          <!-- ---------------------------------------------------------------- -->
+
+
+
+          <div class="hourlyCon"></div>
+
+          
+
+
+
+
+
+
+          <!-- ---------------------------------------------------------------- -->
+        </div>
       </div>
     </div>
-    <div class="soon bg-sky-300 w-full min-h-100"></div>
+    <div class="soon bg-sky-300 w-full min-h-100">
+      {{ currentTime }}
+    </div>
   </div>
   <footer class="w-full min-h-100">
     <img class="shymImg" src="./img/shym.png">
@@ -159,6 +241,69 @@ export default {
   </footer>
 </template>
 <style>
+.hourlyCon {
+  margin: 0 8px;
+  width: 44px;
+  height: 90px;
+  background-color: red;
+}
+.nav {
+  padding: 20px 0 30px 60px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.navBtn {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+}
+.navInfoImg {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+}
+.navBtn2 {
+  color: white;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 20px 0;
+  width: 136px;
+  height: 48px;
+  background: #75B6F2;
+  box-shadow: 0px 8.88889px 10.6667px rgba(117, 182, 242, 0.15);
+  border-radius: 12px;
+  display: flex;
+  padding: 10px 16px;
+  align-items: center;
+}
+.hourlyContent {
+  margin:14px 16px 0 16px;
+  padding-bottom: 8px;
+  overflow-y: auto;
+  height: 90px;
+}
+.nameHourly {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #4F5864;
+  padding: 16px;
+  margin: 0 16px;
+  border-bottom: 1px solid #E1E7EE;;
+}
+.clockImg {
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+}
 .todayDescriptionText {
   font-weight: 300;
   font-size: 14px;
