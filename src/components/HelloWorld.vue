@@ -12,7 +12,26 @@ export default {
       weatherData: null,
       currentTime: null,
       countHour: null,
-      countSth: ''
+      countHour2: null,
+      countHour3: null,
+      countHour4: null,
+      countHour5: null,
+      countHour6: null,
+      countHour7: null,
+      countSth: '',
+      countSth2: '',
+      countSth3: '',
+      countSth4: '',
+      countSth5: '',
+      countSth6: '',
+      countSth7: '',
+      example: null,
+      example2: null,
+      example3: null,
+      example4: null,
+      example5: null,
+      example6: null,
+      example7: null,
     };
   },
   mounted() {
@@ -25,10 +44,11 @@ export default {
       this.isRight = !this.isRight
     },
     getWeather() {
-      // https://api.openweathermap.org/data/2.5/weather?q=Shymbulak,kz&appid=::MYID::&units=metric 
+      
       axios.get(`https://api.openweathermap.org/data/2.5/weather?q=Almaty&lang=ru&appid=33ea4cfd68c6b4051c16393b1be274f6&units=metric`)
         .then(response => {
           this.today = response.data.main.temp;
+          this.today = Math.round(this.today);
           this.humidity = response.data.main.humidity;
           this.now = response.data.weather[0].description;
         })
@@ -39,21 +59,84 @@ export default {
         .then(response => {
           this.hourly = response.data;
           this.hourlyValue = response.data.list[0].dt_txt;
-          console.log(this.hourly)
+          console.log(response.data)
+
 
           this.countHourly();
 
+          if (this.countHour < 10) {
+            this.countSth = '2023-06-08 ' + '0' + this.countHour + ':00:00';
+          } else {
+            this.countSth = '2023-06-08 ' + this.countHour + ':00:00';
+          }
 
-          this.countSth = '2023-05-16 ' + this.countHour + ':00:00';
+          if (this.countHour2 < 10) {
+            this.countSth2 = '2023-06-08 ' + '0' + this.countHour2 + ':00:00';
+          } else {
+            this.countSth2 = '2023-06-08 ' + this.countHour2 + ':00:00';
+          }
 
-          console.log(this.countSth)
-          console.log(this.hourly.list[0].dt_txt)
+          if (this.countHour3 < 10) {
+            this.countSth3 = '2023-06-09 ' + '0' + this.countHour3 + ':00:00';
+          } else {
+            this.countSth3 = '2023-06-09 ' + this.countHour3 + ':00:00';
+          }
+
+          if (this.countHour4 < 10) {
+            this.countSth4 = '2023-06-09 ' + '0' + this.countHour4 + ':00:00';
+          } else {
+            this.countSth4 = '2023-06-09 ' + this.countHour4 + ':00:00';
+          }
+
+          if (this.countHour5 < 10) {
+            this.countSth5 = '2023-06-09 ' + '0' + this.countHour5 + ':00:00';
+          } else {
+            this.countSth5 = '2023-06-09 ' + this.countHour5 + ':00:00';
+          }
+
+          if (this.countHour6 < 10) {
+            this.countSth6 = '2023-06-09 ' + '0' + this.countHour6 + ':00:00';
+          } else {
+            this.countSth6 = '2023-06-09 ' + this.countHour6 + ':00:00';
+          }
+
+          if (this.countHour7 < 10) {
+            this.countSth7 = '2023-06-09 ' + '0' + this.countHour7 + ':00:00';
+          } else {
+            this.countSth7 = '2023-06-09 ' + this.countHour7 + ':00:00';
+          }
+
           var countSth = this.countSth;
+          var countSth2 = this.countSth2;
+          var countSth3 = this.countSth3;
+          var countSth4 = this.countSth4;
+          var countSth5 = this.countSt5h;
+          var countSth6 = this.countSth6;
+          var countSth7 = this.countSth7;
           var hourlyList = this.hourly.list;
 
           for (var i = 0; i < 30; i++) {
             if (countSth == hourlyList[i].dt_txt) {
-              console.log(i);
+              this.example = this.hourly.list[i].main.temp
+              this.example = Math.round(this.example);
+            } else if (countSth2 == hourlyList[i].dt_txt){
+              this.example2 = this.hourly.list[i].main.temp
+              this.example2 = Math.round(this.example2);
+            } else if (countSth3 == hourlyList[i].dt_txt){
+              this.example3 = this.hourly.list[i].main.temp
+              this.example3 = Math.round(this.example3);
+            } else if (countSth4 == hourlyList[i].dt_txt){
+              this.example4 = this.hourly.list[i].main.temp
+              this.example4 = Math.round(this.example4);
+            } else if (countSth5 == hourlyList[i].dt_txt){
+              this.example5 = this.hourly.list[i].main.temp
+              this.example5 = Math.round(this.example5);
+            } else if (countSth6 == hourlyList[i].dt_txt){
+              this.example6 = this.hourly.list[i].main.temp
+              this.example6 = Math.round(this.example6);
+            } else if (countSth7 == hourlyList[i].dt_txt){
+              this.example7 = this.hourly.list[i].main.temp
+              this.example7 = Math.round(this.example7);
             }
           }
 
@@ -67,16 +150,17 @@ export default {
     },
     fetchWeatherData() {
       const apiKey = '967bce65ce664cc592ae4619c72d28e5';
-      const apiUrl = 'https://api.weatherbit.io/v2.0/forecast/hourly?city=Chimbulak&key=967bce65ce664cc592ae4619c72d28e5';
+      const apiUrl = 'https://api.weatherbit.io/v2.0/forecast/hourly?city=Almaty&key=967bce65ce664cc592ae4619c72d28e5';
 
       axios.get(apiUrl, {
         params: {
           key: apiKey,
-          city: 'Chimbulak'
+          city: 'Almaty'
         }
       })
       .then(response => {
         this.weatherData = response.data;
+        console.log(this.weatherData)
 
 
 
@@ -88,6 +172,7 @@ export default {
       .catch(error => {
         console.error(error);
       });
+
     },
     updateTime() {
       const date = new Date();
@@ -97,12 +182,72 @@ export default {
       setTimeout(this.updateTime, 1000);
     },
     countHourly() {
-      this.countHour = Number(this.currentTime) + 3
+      this.countHour = Number(this.currentTime) 
       if (this.countHour == 24){
         this.countHour = 0
       } else if (this.countHour > 24) {
         this.countHour = this.countHour - 24
       }
+
+
+      this.countHour2 = this.countHour +3
+
+      if (this.countHour2 == 24){
+        this.countHour2 = 0
+      } else if (this.countHour2 > 24) {
+        this.countHour2 = this.countHour2 - 24
+      } 
+
+      this.countHour3 = this.countHour2 +3
+
+      if (this.countHour3 == 24){
+        this.countHour3 = 0
+      } else if (this.countHour3 > 24) {
+        this.countHour3 = this.countHour3 - 24
+      } 
+
+
+
+      this.countHour4 = this.countHour3 +3
+
+      if (this.countHour4 == 24){
+        this.countHour4 = 0
+      } else if (this.countHour4 > 24) {
+        this.countHour4 = this.countHour4 - 24
+      }
+
+
+
+      this.countHour5 = this.countHour4 +3
+
+      if (this.countHour5 == 24){
+        this.countHour5 = 0
+      } else if (this.countHour5 > 24) {
+        this.countHour5 = this.countHour5 - 24
+      }
+
+
+
+      this.countHour6 = this.countHour5 +3
+
+      if (this.countHour6 == 24){
+        this.countHour6 = 0
+      } else if (this.countHour6 > 24) {
+        this.countHour6 = this.countHour6 - 24
+      }
+
+
+
+
+      this.countHour7 = this.countHour6 +3
+
+      if (this.countHour7 == 24){
+        this.countHour7 = 0
+      } else if (this.countHour7 > 24) {
+        this.countHour7 = this.countHour7 - 24
+      }
+
+
       console.log(this.countHour)
     }
   }
@@ -157,25 +302,56 @@ export default {
         </div>
         <div class="flex hourlyContent min-w-100">
 
-          <!-- ---------------------------------------------------------------- -->
+  <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 
 
 
-          <div class="hourlyCon"></div>
+          <div class="hourlyCon flex flex-col">
+            <p class="textHourly2">{{ countHour }}</p>
+            <img class="hourlyImg" src="./img/sun.png">
+            <p class="textHourly">{{ example }}</p>
+          </div>
+          <div class="hourlyCon flex flex-col">
+            <p class="textHourly2">{{ countHour2 }}</p>
+            <img class="hourlyImg" src="./img/sun.png">
+            <p class="textHourly">{{ example2 }}</p>
+          </div>
+          <div class="hourlyCon flex flex-col">
+            <p class="textHourly2">{{ countHour3 }}</p>
+            <img class="hourlyImg" src="./img/sun.png">
+            <p class="textHourly">{{ example3 }}</p>
+          </div>
+          <div class="hourlyCon flex flex-col">
+            <p class="textHourly2">{{ countHour4 }}</p>
+            <img class="hourlyImg" src="./img/sun.png">
+            <p class="textHourly">{{ example4 }}</p>
+          </div>
+          <div class="hourlyCon flex flex-col">
+            <p class="textHourly2">{{ countHour5 }}</p>
+            <img class="hourlyImg" src="./img/sun.png">
+            <p class="textHourly">{{ example5 }}</p>
+          </div>
+          <div class="hourlyCon flex flex-col">
+            <p class="textHourly2">{{ countHour6 }}</p>
+            <img class="hourlyImg" src="./img/sun.png">
+            <p class="textHourly">{{ example6 }}</p>
+          </div>
+          <div class="hourlyCon flex flex-col">
+            <p class="textHourly2">{{ countHour7 }}</p>
+            <img class="hourlyImg" src="./img/sun.png">
+            <p class="textHourly">{{ example7 }}</p>
+          </div>
 
-          
 
 
 
 
-
-
-          <!-- ---------------------------------------------------------------- -->
+  <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
         </div>
       </div>
     </div>
     <div class="soon bg-sky-300 w-full min-h-100">
-      {{ currentTime }}
+
     </div>
   </div>
   <footer class="w-full min-h-100">
@@ -243,9 +419,31 @@ export default {
 <style>
 .hourlyCon {
   margin: 0 8px;
+  padding: 0;
   width: 44px;
   height: 90px;
-  background-color: red;
+  align-items: center;
+}
+.textHourly {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #4F5864;
+  padding-top: 0;
+}
+.textHourly2 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #6D7784;
+}
+.hourlyImg {
+  width: 24px;
+  height: 24px;
 }
 .nav {
   padding: 20px 0 30px 60px;
@@ -287,7 +485,7 @@ export default {
 .hourlyContent {
   margin:14px 16px 0 16px;
   padding-bottom: 8px;
-  overflow-y: auto;
+  overflow-x: auto;
   height: 90px;
 }
 .nameHourly {
